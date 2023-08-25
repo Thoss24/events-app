@@ -11,6 +11,5 @@ ul {
 }
 
 .active {
-    
-    
+    text-decoration: underline;
 }

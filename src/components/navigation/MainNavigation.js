@@ -1,8 +1,9 @@
 import { NavLink } from "react-router-dom";
 import classes from "./MainNavigation.module.css";
 
+
 const MainNavigation = () => {
-  const isActive = (isActive) => {
+  const isActive = ({isActive}) => {
     return isActive ? classes.active : undefined;
   };
 
