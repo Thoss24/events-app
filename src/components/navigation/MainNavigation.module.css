@@ -1,0 +1,16 @@
+a {
+    text-decoration: none;
+    color: black;
+}
+
+ul {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    list-style-type: none;
+}
+
+.active {
+    
+    
+}
