@@ -1,0 +1,13 @@
+.event-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(34, 33, 33, 0.2);
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.event-item h1, h2:hover {
+    cursor: pointer;
+}

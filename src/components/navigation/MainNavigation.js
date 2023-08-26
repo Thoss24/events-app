@@ -8,7 +8,7 @@ const MainNavigation = () => {
   };
 
   return (
-    <div>
+    <div className={classes['main-nav']}>
       <nav>
         <ul>
           <li>

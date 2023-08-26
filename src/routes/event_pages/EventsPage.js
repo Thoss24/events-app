@@ -1,41 +1,63 @@
-import useHttp from "../../hooks/use-http";
-import { useEffect } from "react";
+// import useHttp from "../../hooks/use-http";
+import EventList from "../../components/elements/EventList";
+// import { useEffect } from "react";
 import { useState } from "react";
+import classes from "./EventsPage.module.css";
+import { json, useLoaderData } from "react-router-dom";
 
 const EventsPage = () => {
+  const [events, setEvents] = useState([]);
 
-    const [events, setEvents] = useState([])
+  // const { sendRequest } = useHttp();
 
-    const { sendRequest } = useHttp()
+  // useEffect(() => {
+  //   sendRequest(applyFetchedData);
+  // }, [sendRequest]);
 
-    
-    useEffect(() => {
-        sendRequest(applyFetchedData)
-    }, [sendRequest])
-    
-    const applyFetchedData = (data) => {
+  // const applyFetchedData = (data) => {
+  //   const eventsArray = [];
 
-        const eventsArray = [];
+  //   for (const item in data) {
+  //     eventsArray.push({
+  //       name: data[item].name,
+  //       date: data[item].date,
+  //       id: data[item].id,
+  //     });
+  //   }
 
-        for (const item in data) {
-            eventsArray.push({
-                name: data[item]
-            });
-        };
+  //   setEvents(eventsArray);
+  //   console.log(eventsArray);
+  // };
 
-        setEvents(eventsArray)
-    };
+  const data = useLoaderData();
 
-    return (
-        <div>
-            <h1>Events page</h1>
-            <ul>
-                {events.map(event => (
-                    <li key={event}>{event.name}</li>
-                ))}
-            </ul>
-        </div>
-    )
+  const eventsArray = [];
+
+  for (const item in data) {
+      eventsArray.push({
+        name: data[item].name,
+        date: data[item].date,
+        id: data[item].id,
+      });
+  }
+
+  return (
+    <div className={classes['events-page']}>
+      <h1>Events page</h1>
+      <EventList events={eventsArray} />
+    </div>
+  );
 };
 
-export default EventsPage
+export default EventsPage;
+
+export const loader = async () => {
+  
+  const response = await fetch('https://react-http-6cb96-default-rtdb.europe-west1.firebasedatabase.app/events.json')
+
+  if (!response.ok) {
+    return json({message: 'Could not retrieve events'}, {status: 500})
+  } else {
+    return response
+  }
+}

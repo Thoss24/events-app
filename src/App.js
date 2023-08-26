@@ -1,19 +1,18 @@
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import AppRoot from './routes/app/AppRoot';
-import Error from './components/error/Error';
-import Home from './routes/home/Home';
-import EventsPage from './routes/event_pages/EventsPage';
-import EventsRoot from './routes/event_pages/EventsRoot';
-import NewEventPage from './routes/event_pages/NewEventPage';
-import EventDetailPage from './routes/event_pages/EventDetailPage';
-import EditEventPage from './routes/event_pages/EditEventPage';
-import './App.css';
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import AppRoot from "./routes/app/AppRoot";
+import Error from "./components/error/Error";
+import Home from "./routes/home/Home";
+import EventsPage, { loader as eventsPageLoader} from "./routes/event_pages/EventsPage";
+import EventsRoot from "./routes/event_pages/EventsRoot";
+import NewEventPage from "./routes/event_pages/NewEventPage";
+import EditEventPage from "./routes/event_pages/EditEventPage";
+import EventDetailPage, {loader as eventDetailLoader,} from './routes/event_pages/EventDetailPage';
+import "./App.css";
 
 function App() {
-
   const route = createBrowserRouter([
     {
-      path: '/',
+      path: "/",
       element: <AppRoot />,
       errorElement: <Error />,
       children: [
@@ -22,34 +21,40 @@ function App() {
           element: <Home />,
         },
         {
-          path: 'events',
+          path: "events",
           element: <EventsRoot />,
           children: [
             {
               index: true,
               element: <EventsPage />,
+              loader: eventsPageLoader
             },
             {
-              path: 'eventId',
-              element: <EventDetailPage />,
+              path: ":eventId",
+              id: "event-detail",
+              loader: eventDetailLoader,
               children: [
                 {
-                  path: 'eventId/edit_event',
-                  element: <EditEventPage />
-                }
-              ]
+                  index: true,
+                  element: <EventDetailPage />,
+                },
+                {
+                  path: ":eventId/edit",
+                  element: <EditEventPage />,
+                },
+              ],
             },
             {
-              path: 'new_event',
-              element: <NewEventPage />
-            }
-          ]
+              path: "new-event",
+              element: <NewEventPage />,
+            },
+          ],
         },
-      ]    
-    }
-  ])
+      ],
+    },
+  ]);
 
-  return <RouterProvider router={route}></RouterProvider>
+  return <RouterProvider router={route}></RouterProvider>;
 }
 
 export default App;

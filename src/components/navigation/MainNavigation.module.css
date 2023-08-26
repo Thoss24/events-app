@@ -13,3 +13,8 @@ ul {
 .active {
     text-decoration: underline;
 }
+
+.main-nav {
+    display: flex;
+    padding: 20px;
+}

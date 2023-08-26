@@ -1,0 +1,6 @@
+.events-root-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
