@@ -37,7 +37,7 @@ const EventsPage = () => {
       eventsArray.push({
         name: data[item].name,
         date: data[item].date,
-        id: data[item].id,
+        id: item,
       });
   }
 
