@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 
 const eventsState = {
     bookedEvents: [],
@@ -9,8 +9,9 @@ const eventsSlice = createSlice({
     name: 'events',
     initialState: eventsState,
     reducers: {
-        addEvents() {
-
+        addEvents(state) {
+            state.bookedEventsQuantity++
+            console.log(current(state))
         },
         removeEvent() {
 

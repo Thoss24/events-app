@@ -1,11 +1,13 @@
 import { NavLink } from "react-router-dom";
 import classes from "./MainNavigation.module.css";
-
+import { useSelector } from "react-redux/es/hooks/useSelector";
 
 const MainNavigation = () => {
   const isActive = ({isActive}) => {
     return isActive ? classes.active : undefined;
   };
+
+  const numberOfBookedEvents = useSelector(state => state.events.bookedEventsQuantity)
 
   return (
     <div className={classes['main-nav']}>
@@ -23,6 +25,7 @@ const MainNavigation = () => {
           </li>
         </ul>
       </nav>
+      <p>Booked Events: <strong>{numberOfBookedEvents}</strong></p>
     </div>
   );
 };

@@ -1,38 +1,46 @@
 import Button from "../../components/ui/Button";
-import classes from './EventDetailPage.module.css';
+import classes from "./EventDetailPage.module.css";
 import { json, useRouteLoaderData } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { eventsActions } from "../../store/events_slice";
 
 const EventDetailPage = () => {
+  const data = useRouteLoaderData("event-detail");
 
-    const data = useRouteLoaderData('event-detail');
+  const dispatch = useDispatch();
 
-    console.log(data)
 
-    return (
-        <div className={classes['event-details-container']}>
-            <h1>{data.name}</h1>
-            <h2>{data.date}</h2>
-            <div className={classes['buttons-container']}>
-            <Button text={'Back'} link={'..'}></Button>
-            <Button text={'Edit'} ></Button>
-            </div>
-        </div>
-    )
+  const addEvent = () => {
+    dispatch(eventsActions.addEvents())
+  };
+
+  return (
+    <div className={classes["event-details-container"]}>
+      <h1>{data.name}</h1>
+      <h2>{data.date}</h2>
+      <div className={classes["buttons-container"]}>
+        <Button text={"Back"} link={".."}/>
+        <Button text={"Edit"} link={"edit"}/>
+        <Button text={'Add'} clicked={addEvent}/>
+      </div>
+    </div>
+  );
 };
 
-export default EventDetailPage
+export default EventDetailPage;
 
-export const loader = async ({request, params}) => {
+export const loader = async ({ request, params }) => {
+  const id = params.eventId;
 
-    const id = params.eventId
+  console.log(params);
 
-    console.log(id)
+  const response = await fetch(
+    `https://react-http-6cb96-default-rtdb.europe-west1.firebasedatabase.app/events/${id}.json`
+  );
 
-    const response = await fetch(`https://react-http-6cb96-default-rtdb.europe-west1.firebasedatabase.app/events/${id}.json`)
-
-    if (!response.ok) {
-        return json({message: 'Could not load event details'}, {status: 500})
-    } else {
-        return response
-    }
+  if (!response.ok) {
+    return json({ message: "Could not load event details!" }, { status: 500 });
+  } else {
+    return response;
+  }
 };

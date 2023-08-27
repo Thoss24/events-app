@@ -1,6 +1,6 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import AppRoot from "./routes/app/AppRoot";
-import Error from "./components/error/Error";
+import Error from "./routes/error/Error";
 import Home from "./routes/home/Home";
 import EventsPage, { loader as eventsPageLoader} from "./routes/event_pages/EventsPage";
 import EventsRoot from "./routes/event_pages/EventsRoot";
@@ -39,7 +39,7 @@ function App() {
                   element: <EventDetailPage />,
                 },
                 {
-                  path: ":eventId/edit",
+                  path: "edit",
                   element: <EditEventPage />,
                 },
               ],
