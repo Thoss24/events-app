@@ -2,11 +2,11 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import AppRoot from "./routes/app/AppRoot";
 import Error from "./routes/error/Error";
 import Home from "./routes/home/Home";
-import EventsPage, { loader as eventsPageLoader} from "./routes/event_pages/EventsPage";
+import EventsPage, { loader as eventsPageLoader, } from "./routes/event_pages/EventsPage";
 import EventsRoot from "./routes/event_pages/EventsRoot";
-import NewEventPage from "./routes/event_pages/NewEventPage";
+import NewEventPage, {action as newEventAction} from "./routes/event_pages/NewEventPage";
 import EditEventPage from "./routes/event_pages/EditEventPage";
-import EventDetailPage, {loader as eventDetailLoader,} from './routes/event_pages/EventDetailPage';
+import EventDetailPage, {loader as eventDetailLoader, action as deleteEventAction } from './routes/event_pages/EventDetailPage';
 import "./App.css";
 
 function App() {
@@ -27,7 +27,7 @@ function App() {
             {
               index: true,
               element: <EventsPage />,
-              loader: eventsPageLoader
+              loader: eventsPageLoader,
             },
             {
               path: ":eventId",
@@ -37,16 +37,19 @@ function App() {
                 {
                   index: true,
                   element: <EventDetailPage />,
+                  action: deleteEventAction,
                 },
                 {
                   path: "edit",
                   element: <EditEventPage />,
+                  action: deleteEventAction,
                 },
               ],
             },
             {
               path: "new-event",
               element: <NewEventPage />,
+              action: newEventAction
             },
           ],
         },
