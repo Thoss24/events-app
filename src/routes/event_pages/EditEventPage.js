@@ -9,8 +9,6 @@ const EditEventPage = () => {
 
     const date = data.date
 
-    console.log(date)
-
     return (
         <EditEventForm name={name} date={date}/>
     )

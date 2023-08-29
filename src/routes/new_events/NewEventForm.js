@@ -1,7 +1,17 @@
 import classes from './NewEventForm.module.css';
-import { Form } from "react-router-dom";
+import { Form, useNavigation } from "react-router-dom";
 
 const NewEventForm = () => {
+
+  const navigate = useNavigation();
+
+  const isSubmitting = navigate.state === 'submitting';
+
+  const text = isSubmitting ? 'Submitting...' : 'Add'
+
+  if (isSubmitting) {
+    console.log(text)
+  }
 
   return (
       <Form method="POST" className={classes.form}> 
@@ -15,7 +25,7 @@ const NewEventForm = () => {
           <input name="date" type="date"/>
         </div>
         <div className={classes.buttons}>
-        <button type='submit'>Add</button> 
+        <button type='submit' disabled={isSubmitting}>{text}</button> 
         </div>
       </Form>
   );

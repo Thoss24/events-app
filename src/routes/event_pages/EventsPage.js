@@ -26,9 +26,7 @@ const EventsPage = () => {
 
 export default EventsPage;
 
-export const loader = async ({request, params}) => {
-
-  console.log(request, params)
+export const loader = async () => {
   
   const response = await fetch('https://react-http-6cb96-default-rtdb.europe-west1.firebasedatabase.app/events.json')
 

@@ -7,6 +7,7 @@ import EventsRoot from "./routes/event_pages/EventsRoot";
 import NewEventPage, {action as newEventAction} from "./routes/event_pages/NewEventPage";
 import EditEventPage from "./routes/event_pages/EditEventPage";
 import EventDetailPage, {loader as eventDetailLoader, action as deleteEventAction } from './routes/event_pages/EventDetailPage';
+import {action as manipulateEventActions} from './components/utility/manipulate-event-actions';
 import "./App.css";
 
 function App() {
@@ -42,14 +43,14 @@ function App() {
                 {
                   path: "edit",
                   element: <EditEventPage />,
-                  action: deleteEventAction,
+                  action: manipulateEventActions,
                 },
               ],
             },
             {
               path: "new-event",
               element: <NewEventPage />,
-              action: newEventAction
+              action: manipulateEventActions
             },
           ],
         },
