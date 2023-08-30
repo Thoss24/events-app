@@ -1,20 +1,38 @@
-import EventItem from "./EventItem"
-import classes from './EventList.module.css';
+import EventItem from "./EventItem";
+import classes from "./EventList.module.css";
 
 const EventList = (props) => {
+  const checkList = () => {
+    const events = props.events
+      .map((event) => event)
+      .reduce((a, b) => {
+        return a.name;
+      });
+    const finalArr = [];
 
-    return (
-        <div className={classes["events-list"]}>
-        {props.events.map((event) => (
-          <EventItem
+    for (const i in events) {
+      finalArr.push({
+        name: events[i].name,
+        date: events[i].date,
+        id: i,
+      });
+    }
+
+    return finalArr;
+  };
+
+  return (
+    <div className={classes["events-list"]}>
+      {checkList().map((event) => (
+        <EventItem
           key={event.id}
           id={event.id}
           name={event.name}
           date={event.date}
-          />
-        ))}
-      </div>
-    )
-}
+        />
+      ))}
+    </div>
+  );
+};
 
-export default EventList
+export default EventList;
